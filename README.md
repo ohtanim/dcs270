@@ -80,8 +80,9 @@ export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
 export CPATH="$CONDA_PREFIX/include:$CPATH"
 export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
 export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
-export OPENSSL_DIR=$HOME/barn/miniconda3
+export OPENSSL_DIR=$CONDA_PREFIX_1
 export OPENSSL_STATIC=1
+export LIBCLANG_PATH=$CONDA_PREFIX/lib
 
 source $HOME/barn/rust/.cargo/env
 ```
