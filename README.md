@@ -197,6 +197,9 @@ zstandard              0.23.0
 
 ## Testing QRMI Primitive (Python)
 
+> [!NOTE]
+> For running python programs, you need to `conda activate qrmi_ppc` because some modules are installed to conda environment.
+
 ### Prerequisites
 - IQP API Key and Service CRN, which can be obtained in https://quantum.cloud.ibm.com/signin.
 - For Direct Access, you need to get the following values for testing.
