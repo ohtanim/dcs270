@@ -357,7 +357,7 @@ int main(int argc, char** argv)
 gcc -o test test.c -ldl -lslurmfull -L/lib64/slurm
 ```
 
-3) Verify spank_qrmi can be dynamic loaded
+3) Verify spank_qrmi can be dynamically loaded as Slurm plugin
 ```bash
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi/target/release/libspank_qrmi.so
 ```
@@ -367,7 +367,7 @@ Expected:
 Valid Slurm plugin library. name=spank_qrmi, type=spank, version=0xa6358c80
 ```
 
-4) Verify spank_qrmi_supp can be dynamic loaded
+4) Verify spank_qrmi_supp can be dynamically loaded as Slurm plugin
 ```bash
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so
 ```
