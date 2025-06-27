@@ -71,13 +71,17 @@ Copy $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.s
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
 
+> [!NOTE]
+> Following environment variables will ensure static linking(=you don't need to install openssl as dependencies of runtime) with conda's OpenSSL 3 libraries. If you want dynamic linking, specify `export OPENSSL_DIR=$CONDA_PREFIX` only.
+
 ```bash
 export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
 export CPATH="$CONDA_PREFIX/include:$CPATH"
 export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
 export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
-export OPENSSL_DIR=$CONDA_PREFIX
+export OPENSSL_DIR=$HOME/barn/miniconda3
+export OPENSSL_STATIC=1
 
 source $HOME/barn/rust/.cargo/env
 ```
