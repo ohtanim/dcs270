@@ -69,7 +69,7 @@ Copy $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.s
 ### Setting environment variables
 
 > [!NOTE]
-> Ensure to use libraries and header files from the Conda environment, as the modules on the Filesystem are outdated. For example, openssl on the Filesystem is 1.1.1.
+> Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
 
 ```bash
 export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
