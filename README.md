@@ -36,6 +36,10 @@ cd $HOME/barn/spank-plugins/plugins/spank_qrmi_supp
 ```
 
 Edit CMakeLists.txt
+
+> [!NOTE]
+> GCC compiler available on dcs270 is 8.5, which does not support C standard 17.
+
 1) Change CMAKE_C_STANDARD value from 17 to 11,
 ```bash
 set(CMAKE_C_STANDARD 11)
