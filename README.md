@@ -107,7 +107,7 @@ Copy `target/release/libspank_qrmi.so to slurm lib diretory.
 cd $HOME/barn/spank-plugins/qrmi
 pip install -r requirements-dev.txt
 maturin build --release
-pip install /gpfs/u/barn/QNTM/QNTMohmn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+pip install --force-reinstall /gpfs/u/barn/QNTM/QNTMohmn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 ```
 
 ## Installing Python modules
@@ -121,7 +121,7 @@ pip install /gpfs/u/barn/QNTM/QNTMohmn/spank-plugins/qrmi/target/wheels/qrmi-0.5
 cd $HOME/barn/spank-plugins/primitives/python/qiskit_qrmi_primitives
 conda install -c conda-forge qiskit-ibm-runtime
 conda install -c conda-forge qiskit-qasm3-import
-pip install . --no-deps
+pip install . --no-deps --force-reinstall
 pip install -r ./examples/ibm/requirements.txt
 ```
 
@@ -231,7 +231,20 @@ ibm_kingston_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
 ```
 
 2) Direct Access
-T.B.D
+```bash
+SLURM_JOB_QPU_RESOURCES=ibm_rensselaer
+SLURM_JOB_QPU_TYPES=direct-access
+ibm_rensselaer_QRMI_IBM_DA_ENDPOINT=<your Direct Access endpoint URL for ibm_rensselaer>
+ibm_rensselaer_QRMI_IBM_QRS_IAM_ENDPOINT=https://iam.cloud.ibm.com
+ibm_rensselaer_QRMI_IBM_QRS_IAM_APIKEY=<your API key>
+ibm_rensselaer_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
+ibm_rensselaer_QRMI_IBM_DA_AWS_ACCESS_KEY_ID=<your AWS access key ID>
+ibm_rensselaer_QRMI_IBM_DA_AWS_SECRET_ACCESS_KEY=<your AWS secret access key>
+ibm_rensselaer_QRMI_IBM_DA_S3_ENDPOINT=<your S3 endpoint URL>
+ibm_rensselaer_QRMI_IBM_DA_S3_BUCKET=<your S3 bucket name>
+ibm_rensselaer_QRMI_IBM_DA_S3_REGION=<your S3 region>
+ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
+```
 
 ### Run example
 ```bash
@@ -288,7 +301,7 @@ export ibm_kingston_QRMI_IBM_QRS_ENDPOINT=https://quantum.cloud.ibm.com/api/v1
 export ibm_kingston_QRMI_IBM_QRS_IAM_ENDPOINT=https://iam.cloud.ibm.com
 export ibm_kingston_QRMI_IBM_QRS_IAM_APIKEY=<your apikey>
 export ibm_kingston_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
-./target/release/qrmi_task_runner <backend_name> $HOME/barn/spank-plugins/commands/task_runner/examples/qiskit/estimator_input_<backend_name>.json
+./target/release/qrmi_task_runner ibm_kingston $HOME/barn/spank-plugins/commands/task_runner/examples/qiskit/estimator_input_ibm_kingston.json
 ```
 
 You will see:
@@ -299,8 +312,30 @@ Task ID: d1f6tddqbivc73ebs4i0
 
 #### Direct Access
 
-T.B.D.
+Assuming to use ibm_rensselaer.
 
+```bash
+SLURM_JOB_QPU_RESOURCES=ibm_rensselaer
+SLURM_JOB_QPU_TYPES=direct-access
+ibm_rensselaer_QRMI_IBM_DA_ENDPOINT=<your Direct Access endpoint URL for ibm_rensselaer>
+ibm_rensselaer_QRMI_IBM_QRS_IAM_ENDPOINT=https://iam.cloud.ibm.com
+ibm_rensselaer_QRMI_IBM_QRS_IAM_APIKEY=<your API key>
+ibm_rensselaer_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
+ibm_rensselaer_QRMI_IBM_DA_AWS_ACCESS_KEY_ID=<your AWS access key ID>
+ibm_rensselaer_QRMI_IBM_DA_AWS_SECRET_ACCESS_KEY=<your AWS secret access key>
+ibm_rensselaer_QRMI_IBM_DA_S3_ENDPOINT=<your S3 endpoint URL>
+ibm_rensselaer_QRMI_IBM_DA_S3_BUCKET=<your S3 bucket name>
+ibm_rensselaer_QRMI_IBM_DA_S3_REGION=<your S3 region>
+ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
+
+./target/release/qrmi_task_runner ibm_rensselaer $HOME/barn/spank-plugins/commands/task_runner/examples/qiskit/estimator_input_ibm_rensselaer.json
+```
+
+You will see:
+```bash
+Task ID: d1f6tddqbivc73ebs4i0
+{"results": [{"data": {"evs": 33.144319662700426, "stds": 0.2581068379167223, "ensemble_standard_error": 0.24209042405484843}, "metadata": {"shots": 5024, "target_precision": 0.01414213562373095, "circuit_metadata": {}, "resilience": {}, "num_randomizations": 32}}], "metadata": {"dynamical_decoupling": {"enable": false, "sequence_type": "XX", "extra_slack_distribution": "middle", "scheduling_method": "alap"}, "twirling": {"enable_gates": false, "enable_measure": true, "num_randomizations": "auto", "shots_per_randomization": "auto", "interleave_randomizations": true, "strategy": "active-accum"}, "resilience": {"measure_mitigation": true, "zne_mitigation": false, "pec_mitigation": false}, "version": 2}}
+```
 
 ## Testing spank_qrmi/spank_qrmi_supp plugin
 
@@ -358,7 +393,7 @@ int main(int argc, char** argv)
 gcc -o test test.c -ldl -lslurmfull -L/lib64/slurm
 ```
 
-3) Verify spank_qrmi can be dynamically loaded as Slurm plugin
+3) Verify `libspank_qrmi.so` can be dynamically loaded as Slurm plugin
 ```bash
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi/target/release/libspank_qrmi.so
 ```
@@ -368,7 +403,7 @@ Expected:
 Valid Slurm plugin library. name=spank_qrmi, type=spank, version=0xa6358c80
 ```
 
-4) Verify spank_qrmi_supp can be dynamically loaded as Slurm plugin
+4) Verify `libspank_qrmi_supp.so` can be dynamically loaded as Slurm plugin
 ```bash
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so
 ```
