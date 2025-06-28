@@ -20,6 +20,7 @@ conda activate qrmi_ppc
 conda install python
 conda install clang
 conda install libclang
+conda deactivate
 ```
 
 ```bash
@@ -67,6 +68,12 @@ Copy $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.s
 
 ## Building Rust components
 
+### Activating conda
+
+```bash
+conda activate qrmi_ppc
+```
+
 ### Setting environment variables
 
 > [!NOTE]
@@ -110,7 +117,19 @@ maturin build --release
 pip install --force-reinstall /gpfs/u/barn/QNTM/QNTMohmn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 ```
 
+### Deactivating conda
+
+```bash
+conda deactivate
+```
+
 ## Installing Python modules
+
+### Activating conda
+
+```bash
+conda activate qrmi_ppc
+```
 
 ### Installing QRMI primitives
 
@@ -196,6 +215,11 @@ zipp                   3.23.0
 zstandard              0.23.0
 ```
 
+### Deactivating conda
+
+```bash
+conda deactivate
+```
 
 ## Testing QRMI Primitive (Python)
 
@@ -211,6 +235,12 @@ zstandard              0.23.0
   - S3 AWS SECRET ACCESS KEY
   - S3 Bucket name
   - S3 Region name
+
+### Activating conda
+
+```bash
+conda activate qrmi_ppc
+```
 
 ### Change directory to example
 ```bash
@@ -272,6 +302,12 @@ You will see:
 >>> PrimitiveResult([PubResult(data=DataBin(evs=np.ndarray(<shape=(), dtype=float64>), stds=np.ndarray(<shape=(), dtype=float64>), ensemble_standard_error=np.ndarray(<shape=(), dtype=float64>)), metadata={'shots': 4096, 'target_precision': 0.015625, 'circuit_metadata': {}, 'resilience': {}, 'num_randomizations': 32})], metadata={'dynamical_decoupling': {'enable': False, 'sequence_type': 'XX', 'extra_slack_distribution': 'middle', 'scheduling_method': 'alap'}, 'twirling': {'enable_gates': False, 'enable_measure': True, 'num_randomizations': 'auto', 'shots_per_randomization': 'auto', 'interleave_randomizations': True, 'strategy': 'active-accum'}, 'resilience': {'measure_mitigation': True, 'zne_mitigation': False, 'pec_mitigation': False}, 'version': 2})
   > Expectation value: 33.649813025539515
   > Metadata: {'shots': 4096, 'target_precision': 0.015625, 'circuit_metadata': {}, 'resilience': {}, 'num_randomizations': 32}
+```
+
+### Deactivating conda
+
+```bash
+conda deactivate
 ```
 
 ## Testing QRMI Task Runner
