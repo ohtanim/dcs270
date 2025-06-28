@@ -61,6 +61,7 @@ set(CMAKE_C_STANDARD 11)
 ```bash
 mkdir build
 cd build
+cmake ..
 make
 ```
 
