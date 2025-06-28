@@ -355,18 +355,18 @@ export ibm_kingston_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
 Assuming to use ibm_rensselaer.
 
 ```bash
-SLURM_JOB_QPU_RESOURCES=ibm_rensselaer
-SLURM_JOB_QPU_TYPES=direct-access
-ibm_rensselaer_QRMI_IBM_DA_ENDPOINT=<your Direct Access endpoint URL for ibm_rensselaer>
-ibm_rensselaer_QRMI_IBM_QRS_IAM_ENDPOINT=https://iam.cloud.ibm.com
-ibm_rensselaer_QRMI_IBM_QRS_IAM_APIKEY=<your API key>
-ibm_rensselaer_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
-ibm_rensselaer_QRMI_IBM_DA_AWS_ACCESS_KEY_ID=<your AWS access key ID>
-ibm_rensselaer_QRMI_IBM_DA_AWS_SECRET_ACCESS_KEY=<your AWS secret access key>
-ibm_rensselaer_QRMI_IBM_DA_S3_ENDPOINT=<your S3 endpoint URL>
-ibm_rensselaer_QRMI_IBM_DA_S3_BUCKET=<your S3 bucket name>
-ibm_rensselaer_QRMI_IBM_DA_S3_REGION=<your S3 region>
-ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
+export SLURM_JOB_QPU_RESOURCES=ibm_rensselaer
+export SLURM_JOB_QPU_TYPES=direct-access
+export ibm_rensselaer_QRMI_IBM_DA_ENDPOINT=<your Direct Access endpoint URL for ibm_rensselaer>
+export ibm_rensselaer_QRMI_IBM_QRS_IAM_ENDPOINT=https://iam.cloud.ibm.com
+export ibm_rensselaer_QRMI_IBM_QRS_IAM_APIKEY=<your API key>
+export ibm_rensselaer_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
+export ibm_rensselaer_QRMI_IBM_DA_AWS_ACCESS_KEY_ID=<your AWS access key ID>
+export ibm_rensselaer_QRMI_IBM_DA_AWS_SECRET_ACCESS_KEY=<your AWS secret access key>
+export ibm_rensselaer_QRMI_IBM_DA_S3_ENDPOINT=<your S3 endpoint URL>
+export ibm_rensselaer_QRMI_IBM_DA_S3_BUCKET=<your S3 bucket name>
+export ibm_rensselaer_QRMI_IBM_DA_S3_REGION=<your S3 region>
+export ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
 ```
 
 #### Run
