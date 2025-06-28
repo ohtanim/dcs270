@@ -17,6 +17,7 @@ Refer [this document](https://docs.cci.rpi.edu/software/Conda/#installing-conda-
 ```bash
 conda create -y --name qrmi_ppc
 conda activate qrmi_ppc
+conda install python
 conda install clang
 conda install libclang
 ```
