@@ -148,7 +148,8 @@ conda activate qrmi_ppc
 cd $HOME/barn/spank-plugins/primitives/python/qiskit_qrmi_primitives
 conda install -c conda-forge qiskit-ibm-runtime
 conda install -c conda-forge qiskit-qasm3-import
-pip install . --no-deps --force-reinstall
+pip wheel . --no-deps
+pip install qiskit_qrmi_primitives-0.3.1-py3-none-any.whl --no-deps --force-reinstall
 pip install -r ./examples/ibm/requirements.txt
 ```
 
