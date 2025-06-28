@@ -1,6 +1,6 @@
 # dcs270
 
-## Setting up
+## 1. Setting up
 
 ```bash
 ssh dcsfen01
@@ -31,7 +31,7 @@ cd $HOME/barn
 git clone https://github.com/qiskit-community/spank-plugins.git
 ```
 
-## Building C components
+## 2. Building C components
 
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi_supp
@@ -64,9 +64,9 @@ cd build
 make
 ```
 
-Copy $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so to slurm lib diretory.
+Copy `$HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so` to Slurm lib diretory.
 
-## Building Rust components
+## 3. Building Rust components
 
 ### Setting environment variables for Rust tools
 
@@ -107,14 +107,14 @@ export OPENSSL_STATIC=1
 cd $HOME/barn/spank-plugins/commands/task_runner
 cargo build --release
 ```
-Copy `target/release/qrmi_task_runner` to a bin directory that can be executed from the Slurm job script.
+Copy `target/release/qrmi_task_runner` to a `bin` directory that can be executed from the Slurm job script.
 
 ### Building spank_qrmi plugin
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi
 cargo build --release
 ```
-Copy `target/release/libspank_qrmi.so to slurm lib diretory.
+Copy `target/release/libspank_qrmi.so` to Slurm lib diretory.
 
 ### Building and installing QRMI python binding library
 ```bash
@@ -130,7 +130,7 @@ pip install --force-reinstall /gpfs/u/barn/QNTM/QNTMohmn/spank-plugins/qrmi/targ
 conda deactivate
 ```
 
-## Installing Python modules
+## 4. Installing Python modules
 
 ### Activating conda
 
@@ -228,7 +228,7 @@ zstandard              0.23.0
 conda deactivate
 ```
 
-## Unit Testing
+## 5. Unit Testing
 
 ### QRMI Primitive (Python)
 
