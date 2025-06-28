@@ -122,7 +122,7 @@ Copy `target/release/libspank_qrmi.so` to Slurm lib diretory.
 cd $HOME/barn/spank-plugins/qrmi
 pip install -r requirements-dev.txt
 maturin build --release
-pip install --force-reinstall /gpfs/u/barn/QNTM/QNTMohmn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+pip install --force-reinstall $HOME/barn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 ```
 
 ### Deactivating conda
