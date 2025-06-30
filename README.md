@@ -35,30 +35,6 @@ git clone https://github.com/qiskit-community/spank-plugins.git
 
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi_supp
-```
-
-Edit CMakeLists.txt
-
-> [!NOTE]
-> `cmake` available on dcs270 is 3.20.2, which does not support C standard 17.
-
-1) Change CMAKE_C_STANDARD value from 17 to 11
-```bash
-set(CMAKE_C_STANDARD 11)
-```
-
-2) Add `/lib64/slurm` to slurm search paths like below.
-```bash
-  find_path(SLURM_MODULES_DIR NAMES slurm
-          PATHS
-          /lib64/slurm
-          /usr/lib64/slurm
-          /usr/lib/x86_64-linux-gnu/slurm
-          DOC "Directory containing SLURM extensions."
-  )
-```
-
-```bash
 mkdir build
 cd build
 cmake ..
@@ -384,61 +360,9 @@ Task ID: d1f6tddqbivc73ebs4i0
 
 ### Slurm plugins
 
-1) Create test.c
+Refer [this](https://github.com/qiskit-community/spank-plugins/tree/main/plugins/tests/metadata) to build test.
 
-```bash
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-#include <dlfcn.h>
-
-int main(int argc, char** argv)
-{
-    void *handle;
-    char *type, *name;
-    uint32_t *version;
-
-    if (argc != 2) {
-        printf("(E)Missing argument. Specify path to plugin library file.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    handle = dlopen(argv[1], RTLD_LAZY);
-    if (handle == NULL) {
-        printf("%s\n", dlerror());
-        exit(EXIT_FAILURE);
-    }
-
-    if (!(name = dlsym(handle, "plugin_name"))) {
-        printf("(E)Invalid Slurm plugin library. `plugin_name` is missing.\n");
-        dlclose(handle);
-        exit(EXIT_FAILURE);
-    }
-    if (!(type = dlsym(handle, "plugin_type"))) {
-        printf("(E)Invalid Slurm plugin library. `plugin_type` is missing.\n");
-        dlclose(handle);
-        exit(EXIT_FAILURE);
-    }
-    if (!(version = dlsym(handle, "plugin_version"))) {
-        printf("(E)Invalid Slurm plugin library. `plugin_version` is missing.\n");
-        dlclose(handle);
-        exit(EXIT_FAILURE);
-    }
-
-    printf("Valid Slurm plugin library. name=%s, type=%s, version=0x%x\n", name, type, version);
-    dlclose(handle);
-
-    return 0;
-}
-```
-
-2) Compile
-```bash
-gcc -o test test.c -ldl -lslurmfull -L/lib64/slurm
-```
-
-3) Verify `libspank_qrmi.so` can be dynamically loaded as Slurm plugin
+1) Verify `libspank_qrmi.so` can be dynamically loaded as Slurm plugin
 ```bash
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi/target/release/libspank_qrmi.so
 ```
@@ -448,7 +372,7 @@ Expected:
 Valid Slurm plugin library. name=spank_qrmi, type=spank, version=0xa6358c80
 ```
 
-4) Verify `libspank_qrmi_supp.so` can be dynamically loaded as Slurm plugin
+2) Verify `libspank_qrmi_supp.so` can be dynamically loaded as Slurm plugin
 ```bash
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so
 ```
