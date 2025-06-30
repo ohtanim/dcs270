@@ -313,11 +313,11 @@ conda deactivate
 cd $HOME/barn/spank-plugins/commands/task_runner
 ```
 
-#### Run task runner
+#### Set environment variables
 
-1) Qiskit Runtime Service
+##### 1. Qiskit Runtime Service
 
-Assuming to use ibm_kingston.
+Assuming to use `ibm_kingston`.
 
 ```bash
 export SLURM_JOB_QPU_RESOURCES=ibm_kingston
@@ -328,9 +328,9 @@ export ibm_kingston_QRMI_IBM_QRS_IAM_APIKEY=<your apikey>
 export ibm_kingston_QRMI_IBM_QRS_SERVICE_CRN=<your Service CRN>
 ```
 
-2) Direct Access
+##### 2. Direct Access
 
-Assuming to use ibm_rensselaer.
+Assuming to use `ibm_rensselaer`.
 
 ```bash
 export SLURM_JOB_QPU_RESOURCES=ibm_rensselaer
