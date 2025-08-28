@@ -31,19 +31,7 @@ cd $HOME/barn
 git clone https://github.com/qiskit-community/spank-plugins.git
 ```
 
-## 2. Building SPANK Plugin
-
-```bash
-cd $HOME/barn/spank-plugins/plugins/spank_qrmi
-mkdir build
-cd build
-cmake ..
-make
-```
-
-Copy `$HOME/barn/spank-plugins/plugins/spank_qrmi/build/spank_qrmi.so` to Slurm lib diretory.
-
-## 3. Building QRMI components
+## 2. Building QRMI components
 
 ### Setting environment variables for Rust tools
 
@@ -79,19 +67,12 @@ export OPENSSL_DIR=$HOME/barn/miniconda3
 export OPENSSL_STATIC=1
 ```
 
-### Building task_runner
-```bash
-cd $HOME/barn/spank-plugins/commands/task_runner
-cargo build --release
-```
-Copy `target/release/qrmi_task_runner` to a `bin` directory that can be executed from the Slurm job script.
-
 ### Building spank_qrmi plugin
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi
 cargo build --release
 ```
-Copy `target/release/libspank_qrmi.so` to Slurm lib diretory.
+Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 
 ### Building and installing QRMI python binding library
 ```bash
