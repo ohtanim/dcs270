@@ -31,19 +31,19 @@ cd $HOME/barn
 git clone https://github.com/qiskit-community/spank-plugins.git
 ```
 
-## 2. Building C components
+## 2. Building SPANK Plugin
 
 ```bash
-cd $HOME/barn/spank-plugins/plugins/spank_qrmi_supp
+cd $HOME/barn/spank-plugins/plugins/spank_qrmi
 mkdir build
 cd build
 cmake ..
 make
 ```
 
-Copy `$HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so` to Slurm lib diretory.
+Copy `$HOME/barn/spank-plugins/plugins/spank_qrmi/build/spank_qrmi.so` to Slurm lib diretory.
 
-## 3. Building Rust components
+## 3. Building QRMI components
 
 ### Setting environment variables for Rust tools
 
