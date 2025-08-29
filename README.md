@@ -29,6 +29,7 @@ export https_proxy=$http_proxy
 
 cd $HOME/barn
 git clone https://github.com/qiskit-community/spank-plugins.git
+git clone https://github.com/qiskit-community/qrmi.git
 ```
 
 ## 2. Building and Installing SPANK plugin & QRMI
