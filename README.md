@@ -39,6 +39,13 @@ git clone https://github.com/qiskit-community/qrmi.git
 
 ## 2. Building and Installing SPANK plugin & QRMI
 
+### Using GCC 15 (System default is 8.4)
+
+```bash
+export CC=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/gcc
+export CXX=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/g++
+```
+
 ### Setting environment variables for Rust tools
 
 ```bash
@@ -85,29 +92,11 @@ Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 
 ### Building and installing QRMI python binding library
 
-> [!NOTE]
-> Since available GCC compiler is not sufficient (available = 8.5, expected >= 9.3) for building `numpy`, we install Qiskit by using `conda install` instead of using `pip install`. 
-
-> [!NOTE]
-> `qiskit_pasqal_provider` and `pulser` are not available in conda, we skip those Pasqal-related installations.
-
 ```bash
 cd $HOME/barn/spank-plugins/qrmi
 pip install -r requirements-dev.txt
 maturin build --release
-pip install --no-deps --force-reinstall $HOME/barn/qrmi/target/wheels/qrmi-0.7.1-cp312-abi3-manylinux_2_28_ppc64le.whl
-conda install -c conda-forge qiskit-ibm-runtime
-conda install -c conda-forge qiskit-qasm3-import
-conda install -c conda-forge python-dotenv 
-```
-
-If GCC 15.1.0 is available, above installation steps would be simplified like below:
-
-```bash
-cd $HOME/barn/spank-plugins/qrmi
-pip install -r requirements-dev.txt
-maturin build --release
-pip install --force-reinstall $HOME/barn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+pip install --force-reinstall $HOME/barn/qrmi/target/wheels/qrmi-0.7.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 ```
 
 ### Deactivating conda
