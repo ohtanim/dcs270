@@ -32,6 +32,11 @@ git clone https://github.com/qiskit-community/spank-plugins.git
 git clone https://github.com/qiskit-community/qrmi.git
 ```
 
+> [!NOTE]
+> Not yet tried, but it worth to try. If we can use this newer version of GCC, we can install Qiskit by using `pip install`, instead of `conda install`.
+> `module load gcc/15.1.0`
+
+
 ## 2. Building and Installing SPANK plugin & QRMI
 
 ### Setting environment variables for Rust tools
