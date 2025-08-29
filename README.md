@@ -77,7 +77,10 @@ Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 ### Building and installing QRMI python binding library
 
 > [!NOTE]
-> Since available GCC compiler version is sufficient (available = 8.5, expected >= 9.3) for building & installing `numpy`, we install Qiskit by using `conda install` instead of using `pip install`. 
+> Since available GCC compiler is not sufficient (available = 8.5, expected >= 9.3) for building `numpy`, we install Qiskit by using `conda install` instead of using `pip install`. 
+
+> [!NOTE]
+> Pasqal python modules are not available in conda, we skip Pasqal-related installations.
 
 ```bash
 cd $HOME/barn/spank-plugins/qrmi
