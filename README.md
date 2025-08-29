@@ -86,7 +86,7 @@ Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 > Since available GCC compiler is not sufficient (available = 8.5, expected >= 9.3) for building `numpy`, we install Qiskit by using `conda install` instead of using `pip install`. 
 
 > [!NOTE]
-> Pasqal python modules are not available in conda, we skip Pasqal-related installations.
+> `qiskit_pasqal_provider` and `pulser` are not available in conda, we skip those Pasqal-related installations.
 
 ```bash
 cd $HOME/barn/spank-plugins/qrmi
