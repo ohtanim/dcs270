@@ -31,7 +31,7 @@ cd $HOME/barn
 git clone https://github.com/qiskit-community/spank-plugins.git
 ```
 
-## 2. Building QRMI components
+## 2. Building and Installing SPANK plugin & QRMI
 
 ### Setting environment variables for Rust tools
 
@@ -175,7 +175,7 @@ zstandard              0.23.0
 conda deactivate
 ```
 
-## 5. Unit Testing
+## 3. Unit Testing
 
 ### QRMI Primitive (Python)
 
