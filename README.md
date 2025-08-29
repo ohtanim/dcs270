@@ -76,7 +76,10 @@ export OPENSSL_STATIC=1
 ### Building spank_qrmi plugin
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi
-cargo build --release
+mkdir build
+cd build
+cmake ..
+make
 ```
 Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 
