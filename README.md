@@ -257,6 +257,7 @@ Refer [this](https://github.com/qiskit-community/spank-plugins/tree/main/plugins
 
 1) Verify `spank_qrmi.so` can be dynamically loaded as Slurm plugin
 ```bash
+cd $HOME/barn/spank-plugins/plugins/tests/metadata/build
 LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi/build/spank_qrmi.so
 ```
 
