@@ -95,7 +95,7 @@ Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 cd $HOME/barn/spank-plugins/qrmi
 pip install -r requirements-dev.txt
 maturin build --release
-pip install --no-deps --force-reinstall $HOME/barn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+pip install --no-deps --force-reinstall $HOME/barn/qrmi/target/wheels/qrmi-0.7.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 conda install -c conda-forge qiskit-ibm-runtime
 conda install -c conda-forge qiskit-qasm3-import
 conda install -c conda-forge python-dotenv 
