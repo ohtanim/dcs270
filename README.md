@@ -75,39 +75,24 @@ cargo build --release
 Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 
 ### Building and installing QRMI python binding library
+
+> [!NOTE]
+> Since available GCC compiler version is sufficient (available = 8.5, expected >= 9.3) for building & installing `numpy`, we install Qiskit by using `conda install` instead of using `pip install`. 
+
 ```bash
 cd $HOME/barn/spank-plugins/qrmi
 pip install -r requirements-dev.txt
 maturin build --release
-pip install --force-reinstall $HOME/barn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+pip install --no-deps --force-reinstall $HOME/barn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+conda install -c conda-forge qiskit-ibm-runtime
+conda install -c conda-forge qiskit-qasm3-import
+conda install -c conda-forge python-dotenv 
 ```
 
 ### Deactivating conda
 
 ```bash
 conda deactivate
-```
-
-## 4. Installing Python modules
-
-### Activating conda
-
-```bash
-conda activate qrmi_ppc
-```
-
-### Installing QRMI primitives
-
-> [!NOTE]
-> Ensure to use conda for installing qiskit packages. If you use `pip install`, installation of numpy, as one of the dependencies, must be failed due to using unsupported old GCC compiler (installed = 8.5, required >= 9.3).
-
-```bash
-cd $HOME/barn/spank-plugins/primitives/python/qiskit_qrmi_primitives
-conda install -c conda-forge qiskit-ibm-runtime
-conda install -c conda-forge qiskit-qasm3-import
-pip wheel . --no-deps
-pip install qiskit_qrmi_primitives-0.3.1-py3-none-any.whl --no-deps --force-reinstall
-pip install -r ./examples/ibm/requirements.txt
 ```
 
 ### Verify installed python modules
@@ -212,7 +197,7 @@ conda activate qrmi_ppc
 
 #### Change directory to example
 ```bash
-cd $HOME/barn/spank-plugins/primitives/python/qiskit_qrmi_primitives/examples/ibm
+cd $HOME/barn/qrmi/examples/qiskit_primitives/ibm
 ```
 
 #### Creating .env file
@@ -283,15 +268,15 @@ conda deactivate
 #### Creating input data
 ```bash
 conda activate qrmi_ppc
-cd $HOME/barn/spank-plugins/commands/task_runner/examples/qiskit
+cd $HOME/barn/qrmi/examples/task_runner/qiskit
 python gen_estimator_inputs.py <backend_name> https://quantum.cloud.ibm.com/api <your apikey> <your Service CRN>
 python gen_sampler_inputs.py <backend_name> https://quantum.cloud.ibm.com/api <your apikey> <your Service CRN>
 conda deactivate
 ```
 
-#### Changing directory to task runner directory
+#### Changing directory to your workspace
 ```bash
-cd $HOME/barn/spank-plugins/commands/task_runner
+cd $HOME/barn/
 ```
 
 #### Set environment variables
@@ -330,7 +315,7 @@ export ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
 
 #### Run
 ```bash
-./target/release/qrmi_task_runner <backend_name> $HOME/barn/spank-plugins/commands/task_runner/examples/qiskit/estimator_input_<backend_name>.json
+task_runner <backend_name> $HOME/barn/qrmi/examples/task_runner/qiskit/estimator_input_<backend_name>.json
 ```
 
 You are expected to see like:
@@ -343,24 +328,14 @@ Task ID: d1f6tddqbivc73ebs4i0
 
 Refer [this](https://github.com/qiskit-community/spank-plugins/tree/main/plugins/tests/metadata) to build test.
 
-1) Verify `libspank_qrmi.so` can be dynamically loaded as Slurm plugin
+1) Verify `spank_qrmi.so` can be dynamically loaded as Slurm plugin
 ```bash
-LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi/target/release/libspank_qrmi.so
+LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi/build/spank_qrmi.so
 ```
 
 Expected:
 ```bash
-Valid Slurm plugin library. name=spank_qrmi, type=spank, version=0xa6358c80
-```
-
-2) Verify `libspank_qrmi_supp.so` can be dynamically loaded as Slurm plugin
-```bash
-LD_LIBRARY_PATH=/lib64/slurm:$LD_LIBRARY_PATH ./test $HOME/barn/spank-plugins/plugins/spank_qrmi_supp/build/libspank_qrmi_supp.so
-```
-
-Expected:
-```bash
-Valid Slurm plugin library. name=spank_qrmi_supp, type=spank, version=0xb2b81208
+Valid Slurm plugin library. name=spank_qrmi, type=spank, version=23.11.10
 ```
 
 ## END OF DOCUMENT
