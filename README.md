@@ -92,7 +92,7 @@ Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
 ### Building and installing QRMI python binding library
 
 ```bash
-cd $HOME/barn/spank-plugins/qrmi
+cd $HOME/barn/qrmi
 pip install -r requirements-dev.txt
 maturin build --release
 pip install --force-reinstall $HOME/barn/qrmi/target/wheels/qrmi-0.7.1-cp312-abi3-manylinux_2_28_ppc64le.whl
