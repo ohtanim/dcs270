@@ -29,8 +29,7 @@ conda deactivate
 > `openblas-devel` is required by `scipy`, as dependencies of Pasqal's `pulser` modules.
 
 > [!NOTE]
-> `jpeg` is required by `Pillow`.
-
+> `jpeg` is required by `matplotlib`, as dependencies of Pasqal's `pulser` modules.
 
 ```bash
 export http_proxy=http://proxy:8888
