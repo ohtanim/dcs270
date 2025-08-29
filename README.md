@@ -98,6 +98,15 @@ conda install -c conda-forge qiskit-qasm3-import
 conda install -c conda-forge python-dotenv 
 ```
 
+If GCC 15.1.0 is available, above installation steps would be simplified like below:
+
+```bash
+cd $HOME/barn/spank-plugins/qrmi
+pip install -r requirements-dev.txt
+maturin build --release
+pip install --force-reinstall $HOME/barn/spank-plugins/qrmi/target/wheels/qrmi-0.5.1-cp312-abi3-manylinux_2_28_ppc64le.whl
+```
+
 ### Deactivating conda
 
 ```bash
