@@ -113,7 +113,6 @@ Package                Version
    :
 qiskit                 2.1.2
 qiskit-ibm-runtime     0.41.1
-qiskit_pasqal_provider 0.1.1
 qiskit-qasm3-import    0.6.0
 qrmi                   0.7.1
    :
