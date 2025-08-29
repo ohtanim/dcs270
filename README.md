@@ -21,11 +21,16 @@ conda install python
 conda install clang
 conda install libclang
 conda install openblas-devel
+conda install jpeg
 conda deactivate
 ```
 
 > [!NOTE]
 > `openblas-devel` is required by `scipy`, as dependencies of Pasqal's `pulser` modules.
+
+> [!NOTE]
+> `jpeg` is required by `Pillow`.
+
 
 ```bash
 export http_proxy=http://proxy:8888
