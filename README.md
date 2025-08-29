@@ -33,7 +33,7 @@ git clone https://github.com/qiskit-community/qrmi.git
 ```
 
 > [!NOTE]
-> Not yet tried, but it worth to try. If we can use this newer version of GCC, we can install Qiskit by using `pip install`, instead of `conda install`.
+> Not yet tried, but it worth to try. If we can use this newer version of GCC, we can install Qiskit by using `pip install`, instead of `conda install`. <br><br>
 > `module load gcc/15.1.0`
 
 
