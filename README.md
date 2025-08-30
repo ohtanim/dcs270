@@ -59,7 +59,9 @@ git clone https://github.com/qiskit-community/qrmi.git
 
 ## 2. Building and Installing SPANK plugin & QRMI
 
-### Using GCC 15 (System default is 8.4)
+### 2.1 Using GCC 15 (System default is 8.4)
+
+Use newer version of GCC because recent nympy/scipy cannot be built with GCC 8.4. 
 
 ```bash
 module load gcc/15.1.0
@@ -72,20 +74,20 @@ export CC=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/gcc
 export CXX=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/g++
 ```
 
-### Setting environment variables for Rust tools
+### 2.2 Setting environment variables for Rust tools
 
 ```bash
 # set environment variables for Rust toolset
 source $HOME/barn/rust/.cargo/env
 ```
 
-### Activating conda
+### 2.3 Activating conda
 
 ```bash
 conda activate qrmi_ppc
 ```
 
-### Setting other environment variables
+### 2.4 Setting other environment variables
 
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
@@ -107,7 +109,7 @@ export OPENSSL_DIR=$HOME/barn/miniconda3
 export OPENSSL_STATIC=1
 ```
 
-### Building spank_qrmi plugin
+### 2.5 Building spank_qrmi plugin
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi
 mkdir build
@@ -118,7 +120,7 @@ make
 
 Refer [this document](https://github.com/qiskit-community/spank-plugins/blob/main/plugins/spank_qrmi/README.md#installation) to deploy `spank_qrmi.so`, `qrmi_config.json` and `plugstack.conf` to your Cluster.
 
-### Building and installing QRMI python binding library
+### 2.6 Building and installing QRMI python binding library
 
 ```bash
 cd $HOME/barn/qrmi
@@ -127,13 +129,13 @@ maturin build --release
 pip install --force-reinstall $HOME/barn/qrmi/target/wheels/qrmi-0.7.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 ```
 
-### Deactivating conda
+### 2.7 Deactivating conda
 
 ```bash
 conda deactivate
 ```
 
-### Verify installed python modules
+### 2.8 Verify installed python modules
 ```bash
 pip list
 Package                Version
@@ -155,7 +157,7 @@ qrmi                      0.7.1
    :
 ```
 
-### Deactivating conda
+### 2.9 Deactivating conda
 
 ```bash
 conda deactivate
@@ -163,12 +165,12 @@ conda deactivate
 
 ## 3. Unit Testing
 
-### QRMI & Qiskit Primitives Python modules
+### 3.1 QRMI & Qiskit Primitives Python modules
 
 > [!NOTE]
 > For running python programs, you need to `conda activate qrmi_ppc` because some dependencies(openssl etc.) are available in your conda environment.
 
-#### Prerequisites
+#### 3.1.1 Prerequisites
 - IQP API Key and Service CRN, which can be obtained in https://quantum.cloud.ibm.com/signin.
 - For Direct Access, you need to get the following values for testing.
   - Direct Access API endpoint URL
@@ -178,19 +180,18 @@ conda deactivate
   - S3 Bucket name
   - S3 Region name
 
-#### Activating conda
+#### 3.1.2 Activating conda
 
 ```bash
 conda activate qrmi_ppc
 ```
 
-#### Change directory to example
+#### 3.1.3 Change directory to example
 ```bash
 cd $HOME/barn/qrmi/examples/qiskit_primitives/ibm
 ```
 
-#### Creating .env file
-Create `.env` file with parameter values:
+#### 3.1.4 Creating `.env` file with parameter values
 
 1) Qiskit Runtime Service
 ```bash
@@ -218,7 +219,7 @@ ibm_rensselaer_QRMI_IBM_DA_S3_REGION=<your S3 region>
 ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
 ```
 
-#### Run example
+#### 3.1.5 Run example
 ```bash
 python estimator.py
 ```
@@ -246,15 +247,15 @@ You will see:
   > Metadata: {'shots': 4096, 'target_precision': 0.015625, 'circuit_metadata': {}, 'resilience': {}, 'num_randomizations': 32}
 ```
 
-#### Deactivating conda
+#### 3.1.6 Deactivating conda
 
 ```bash
 conda deactivate
 ```
 
-### QRMI Task Runner
+### 3.2 QRMI Task Runner
 
-#### Creating input data
+#### 3.2.1 Creating input data
 ```bash
 conda activate qrmi_ppc
 cd $HOME/barn/qrmi/examples/task_runner/qiskit
@@ -263,16 +264,16 @@ python gen_sampler_inputs.py <backend_name> https://quantum.cloud.ibm.com/api <y
 conda deactivate
 ```
 
-#### Changing directory to your workspace
+#### 3.2.2 Changing directory to your workspace
 ```bash
 cd $HOME/barn/
 ```
 
-#### Creating .env file
+#### 3.2.3 Creating .env file
 
 Refer [Creating .env file](#creating-env-file).
 
-#### Run
+#### 3.2.4 Run a task
 ```bash
 task_runner <backend_name> $HOME/barn/qrmi/examples/task_runner/qiskit/estimator_input_<backend_name>.json
 ```
@@ -283,7 +284,7 @@ Task ID: d1f6tddqbivc73ebs4i0
 {"results": [{"data": {"evs": 33.144319662700426, "stds": 0.2581068379167223, "ensemble_standard_error": 0.24209042405484843}, "metadata": {"shots": 5024, "target_precision": 0.01414213562373095, "circuit_metadata": {}, "resilience": {}, "num_randomizations": 32}}], "metadata": {"dynamical_decoupling": {"enable": false, "sequence_type": "XX", "extra_slack_distribution": "middle", "scheduling_method": "alap"}, "twirling": {"enable_gates": false, "enable_measure": true, "num_randomizations": "auto", "shots_per_randomization": "auto", "interleave_randomizations": true, "strategy": "active-accum"}, "resilience": {"measure_mitigation": true, "zne_mitigation": false, "pec_mitigation": false}, "version": 2}}
 ```
 
-### Slurm plugins
+### 3.3 Slurm plugins
 
 Refer [this](https://github.com/qiskit-community/spank-plugins/tree/main/plugins/tests/metadata) to build `test` executable.
 
