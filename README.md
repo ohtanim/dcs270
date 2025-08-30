@@ -110,7 +110,8 @@ cd build
 cmake ..
 make
 ```
-Copy `spank_qrmi.so` to Slurm lib diretory.
+
+Refer [this document](https://github.com/qiskit-community/spank-plugins/blob/main/plugins/spank_qrmi/README.md#installation) to deploy `spank_qrmi.so`, `qrmi_config.json` and `plugstack.conf` to your Cluster.
 
 ### Building and installing QRMI python binding library
 
