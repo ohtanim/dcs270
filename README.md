@@ -4,11 +4,13 @@
 * [Setting up your environment on dcs270](#1-setting-up)
 * [Building and installing QRMI and its SPANK Plugin](#2-building-and-installing-spank-plugin--qrmi)
 * [Unit testing](#3-unit-testing)
+* [References](#4-references)
 
 ## 1. Setting up
 
 ```bash
 # login to data center
+ssh <your userid>@blp01.ccni.rpi.edu
 
 # login to frontend of DCS Cluster
 ssh dcsfen01
@@ -297,6 +299,12 @@ Expected:
 ```bash
 Valid Slurm plugin library. name=spank_qrmi, type=spank, version=23.11.10
 ```
+
+## 4. References
+* [Rensselaer - Center for Computational Innovation - Documentation](https://docs.cci.rpi.edu/)
+* [Spank plugin for Quantum workload](https://github.com/qiskit-community/spank-plugins)
+* [Quantum Resource Management Interface(QRMI)](https://github.com/qiskit-community/qrmi)
+* [Slurm SPANK Plugin doc](https://slurm.schedmd.com/spank.html)
 
 ## END OF DOCUMENT
 
