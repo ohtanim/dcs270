@@ -66,6 +66,10 @@ git clone https://github.com/qiskit-community/qrmi.git
 Use newer version of GCC because recent nympy/scipy cannot be built with GCC 8.4. 
 
 ```bash
+# Clear the environment from any previously loaded modules
+module purge > /dev/null 2>&1
+
+# Load the module environment suitable for build
 module load gcc/15.1.0
 ```
 
