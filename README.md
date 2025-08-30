@@ -163,7 +163,7 @@ conda deactivate
 
 ## 3. Unit Testing
 
-### QRMI Primitive (Python)
+### QRMI & Qiskit Primitives Python modules
 
 > [!NOTE]
 > For running python programs, you need to `conda activate qrmi_ppc` because some modules are installed to conda environment.
