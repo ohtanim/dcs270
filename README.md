@@ -166,7 +166,7 @@ conda deactivate
 ### QRMI & Qiskit Primitives Python modules
 
 > [!NOTE]
-> For running python programs, you need to `conda activate qrmi_ppc` because some modules are installed to conda environment.
+> For running python programs, you need to `conda activate qrmi_ppc` because some dependencies(openssl etc.) are available in conda environment.
 
 #### Prerequisites
 - IQP API Key and Service CRN, which can be obtained in https://quantum.cloud.ibm.com/signin.
