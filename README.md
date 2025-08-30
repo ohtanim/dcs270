@@ -3,12 +3,22 @@
 ## 1. Setting up
 
 ```bash
+# login to data center
+
+# login to frontend of DCS Cluster
 ssh dcsfen01
+
+# start an interactive session
 salloc -t 120 --reservation=root_48 --gres=gpu:1 -p dcs-2024
+
+# login to dcs270 node
 ssh dcs270
 
+# recommend to install Rust under Barn directory because they consumes large size of filesystem.
 export CARGO_HOME=$HOME/barn/rust/.cargo
 export RUSTUP_HOME=$HOME/barn/rust/.rustup
+
+# Install Rust toolsets
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
