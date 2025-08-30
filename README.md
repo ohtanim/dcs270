@@ -42,9 +42,11 @@ conda deactivate
 > `jpeg` is required by `matplotlib`, as dependencies of Pasqal's `pulser` modules.
 
 ```bash
+# set proxy to allow internet connection from node.
 export http_proxy=http://proxy:8888
 export https_proxy=$http_proxy
 
+# create clones of QRMI and its spank-plugin
 cd $HOME/barn
 git clone https://github.com/qiskit-community/spank-plugins.git
 git clone https://github.com/qiskit-community/qrmi.git
@@ -68,6 +70,7 @@ export CXX=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/g++
 ### Setting environment variables for Rust tools
 
 ```bash
+# set environment variables for Rust toolset
 source $HOME/barn/rust/.cargo/env
 ```
 
