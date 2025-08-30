@@ -45,6 +45,12 @@ git clone https://github.com/qiskit-community/qrmi.git
 ### Using GCC 15 (System default is 8.4)
 
 ```bash
+module load gcc/15.1.0
+```
+
+Following 2 environment variables are required for Rust cross compilation.
+
+```bash
 export CC=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/gcc
 export CXX=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/g++
 ```
