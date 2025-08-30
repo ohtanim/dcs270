@@ -121,10 +121,17 @@ Package                Version
 ---------------------- -----------
    :
    :
-qiskit                 2.1.2
-qiskit-ibm-runtime     0.41.1
-qiskit-qasm3-import    0.6.0
-qrmi                   0.7.1
+pulser                    1.5.5
+pulser-core               1.5.5
+pulser-pasqal             0.20.1
+pulser-simulation         1.5.5
+   :
+   :
+qiskit                    2.1.2
+qiskit-ibm-runtime        0.41.1
+qiskit_pasqal_provider    0.1.1
+qiskit-qasm3-import       0.6.0
+qrmi                      0.7.1
    :
    :
 ```
