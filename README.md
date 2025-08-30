@@ -91,7 +91,7 @@ cd build
 cmake ..
 make
 ```
-Copy `target/release/spank_qrmi.so` to Slurm lib diretory.
+Copy `spank_qrmi.so` to Slurm lib diretory.
 
 ### Building and installing QRMI python binding library
 
