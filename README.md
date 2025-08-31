@@ -29,7 +29,7 @@ export RUSTUP_HOME=$HOME/barn/rust/.rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-### Installing prerequisites
+### Installing dependencies
 
 Refer [this document](https://docs.cci.rpi.edu/software/Conda/#installing-conda-on-ppc64le) to setup conda for ppc64le.
 
