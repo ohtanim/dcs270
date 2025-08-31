@@ -1,12 +1,12 @@
 # dcs270
 
 ## Jump To:
-* [Setting up your environment on dcs270](#1-setting-up)
-* [Building and installing QRMI and its SPANK Plugin](#2-building-and-installing-spank-plugin--qrmi)
-* [Unit testing](#3-unit-testing)
-* [References](#4-references)
+* [Setting up your environment on dcs270](setting-up)
+* [Building and installing QRMI and its SPANK Plugin](building-and-installing-spank-plugin--qrmi)
+* [Unit testing](unit-testing)
+* [References](references)
 
-## 1. Setting up
+## Logging on to dcs270 
 
 ```bash
 # login to data center
@@ -20,7 +20,13 @@ salloc -t 120 --reservation=root_48 --gres=gpu:1 -p dcs-2024
 
 # login to dcs270 node
 ssh dcs270
+```
 
+## Setting up
+
+### 1 Installing Rust toolset
+
+```bash
 # recommend to install Rust under Barn directory because they consumes large size of filesystem.
 export CARGO_HOME=$HOME/barn/rust/.cargo
 export RUSTUP_HOME=$HOME/barn/rust/.rustup
@@ -28,6 +34,8 @@ export RUSTUP_HOME=$HOME/barn/rust/.rustup
 # Install Rust toolsets
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+
+### 2 Installing prerequisites
 
 Refer [this document](https://docs.cci.rpi.edu/software/Conda/#installing-conda-on-ppc64le) to setup conda for ppc64le.
 
@@ -48,6 +56,8 @@ conda deactivate
 > [!NOTE]
 > `jpeg` is required by `matplotlib`, as dependencies of Pasqal's `pulser` modules.
 
+### 3 Cloning Git respositories
+
 ```bash
 # set proxy to allow internet connection from node.
 export http_proxy=http://proxy:8888
@@ -59,9 +69,9 @@ git clone https://github.com/qiskit-community/spank-plugins.git
 git clone https://github.com/qiskit-community/qrmi.git
 ```
 
-## 2. Building and Installing SPANK plugin & QRMI
+## Building and Installing SPANK plugin & QRMI
 
-### 2.1 Using GCC 15 (System default is 8.4)
+### 1 Using GCC 15 (System default is 8.4)
 
 Use newer version of GCC because recent nympy/scipy cannot be built with GCC 8.4. 
 
@@ -80,20 +90,20 @@ export CC=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/gcc
 export CXX=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/g++
 ```
 
-### 2.2 Setting environment variables for Rust tools
+### 2 Setting environment variables for Rust tools
 
 ```bash
 # set environment variables for Rust toolset
 source $HOME/barn/rust/.cargo/env
 ```
 
-### 2.3 Activating conda
+### 3 Activating conda
 
 ```bash
 conda activate qrmi_ppc
 ```
 
-### 2.4 Setting other environment variables
+### 4 Setting other environment variables
 
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
@@ -107,15 +117,14 @@ export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
 export LIBCLANG_PATH=$CONDA_PREFIX/lib
 ```
 
-> [!NOTE]
-> The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
+The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
 
 ```bash
 export OPENSSL_DIR=$HOME/barn/miniconda3
 export OPENSSL_STATIC=1
 ```
 
-### 2.5 Building spank_qrmi plugin
+### 5 Building spank_qrmi plugin
 ```bash
 cd $HOME/barn/spank-plugins/plugins/spank_qrmi
 mkdir build
@@ -126,7 +135,7 @@ make
 
 Refer [this document](https://github.com/qiskit-community/spank-plugins/blob/main/plugins/spank_qrmi/README.md#installation) to deploy `spank_qrmi.so`, `qrmi_config.json` and `plugstack.conf` to your Cluster.
 
-### 2.6 Building and installing QRMI python binding library
+### 6 Building and installing QRMI python binding library
 
 ```bash
 cd $HOME/barn/qrmi
@@ -135,13 +144,13 @@ maturin build --release
 pip install --force-reinstall $HOME/barn/qrmi/target/wheels/qrmi-0.7.1-cp312-abi3-manylinux_2_28_ppc64le.whl
 ```
 
-### 2.7 Deactivating conda
+### 7 Deactivating conda
 
 ```bash
 conda deactivate
 ```
 
-### 2.8 Verify installed python modules
+### 8 Verify installed python modules
 ```bash
 pip list
 Package                Version
@@ -163,20 +172,20 @@ qrmi                      0.7.1
    :
 ```
 
-### 2.9 Deactivating conda
+### 9 Deactivating conda
 
 ```bash
 conda deactivate
 ```
 
-## 3. Unit Testing
+## Unit Testing
 
-### 3.1 QRMI & Qiskit Primitives Python modules
+### 1 QRMI & Qiskit Primitives Python modules
 
 > [!NOTE]
-> For running python programs, you need to `conda activate qrmi_ppc` because some dependencies(openssl etc.) are available in your conda environment.
+> For running python programs, you need to `conda activate qrmi_ppc` because some dependencies(openssl, clang etc.) are available in your conda environment.
 
-#### 3.1.1 Prerequisites
+#### 1.1 Prerequisites
 - IQP API Key and Service CRN, which can be obtained in https://quantum.cloud.ibm.com/signin.
 - For Direct Access, you need to get the following values for testing.
   - Direct Access API endpoint URL
@@ -186,18 +195,18 @@ conda deactivate
   - S3 Bucket name
   - S3 Region name
 
-#### 3.1.2 Activating conda
+#### 1.2 Activating conda
 
 ```bash
 conda activate qrmi_ppc
 ```
 
-#### 3.1.3 Change directory to example
+#### 1.3 Change directory to example
 ```bash
 cd $HOME/barn/qrmi/examples/qiskit_primitives/ibm
 ```
 
-#### 3.1.4 Creating `.env` file with parameter values
+#### 1.4 Creating `.env` file with parameter values
 
 1) Qiskit Runtime Service
 ```bash
@@ -225,7 +234,7 @@ ibm_rensselaer_QRMI_IBM_DA_S3_REGION=<your S3 region>
 ibm_rensselaer_QRMI_JOB_TIMEOUT_SECONDS=86400
 ```
 
-#### 3.1.5 Run example
+#### 1.5 Run example
 ```bash
 python estimator.py
 ```
@@ -253,15 +262,15 @@ You will see:
   > Metadata: {'shots': 4096, 'target_precision': 0.015625, 'circuit_metadata': {}, 'resilience': {}, 'num_randomizations': 32}
 ```
 
-#### 3.1.6 Deactivating conda
+#### 1.6 Deactivating conda
 
 ```bash
 conda deactivate
 ```
 
-### 3.2 QRMI Task Runner
+### 2 QRMI Task Runner
 
-#### 3.2.1 Creating input data
+#### 2.1 Creating input data
 ```bash
 conda activate qrmi_ppc
 cd $HOME/barn/qrmi/examples/task_runner/qiskit
@@ -270,16 +279,16 @@ python gen_sampler_inputs.py <backend_name> https://quantum.cloud.ibm.com/api <y
 conda deactivate
 ```
 
-#### 3.2.2 Changing directory to your workspace
+#### 2.2 Changing directory to your workspace
 ```bash
 cd $HOME/barn/
 ```
 
-#### 3.2.3 Creating .env file
+#### 2.3 Creating `.env` file with parameter values
 
 Refer [Creating .env file](#creating-env-file).
 
-#### 3.2.4 Run a task
+#### 2.4 Run a task
 ```bash
 task_runner <backend_name> $HOME/barn/qrmi/examples/task_runner/qiskit/estimator_input_<backend_name>.json
 ```
@@ -290,7 +299,7 @@ Task ID: d1f6tddqbivc73ebs4i0
 {"results": [{"data": {"evs": 33.144319662700426, "stds": 0.2581068379167223, "ensemble_standard_error": 0.24209042405484843}, "metadata": {"shots": 5024, "target_precision": 0.01414213562373095, "circuit_metadata": {}, "resilience": {}, "num_randomizations": 32}}], "metadata": {"dynamical_decoupling": {"enable": false, "sequence_type": "XX", "extra_slack_distribution": "middle", "scheduling_method": "alap"}, "twirling": {"enable_gates": false, "enable_measure": true, "num_randomizations": "auto", "shots_per_randomization": "auto", "interleave_randomizations": true, "strategy": "active-accum"}, "resilience": {"measure_mitigation": true, "zne_mitigation": false, "pec_mitigation": false}, "version": 2}}
 ```
 
-### 3.3 Slurm plugins
+### 3 Slurm plugins
 
 Refer [this](https://github.com/qiskit-community/spank-plugins/tree/main/plugins/tests/metadata) to build `test` executable.
 
@@ -304,7 +313,7 @@ Expected:
 Valid Slurm plugin library. name=spank_qrmi, type=spank, version=23.11.10
 ```
 
-## 4. References
+## References
 * [Rensselaer - Center for Computational Innovation - Documentation](https://docs.cci.rpi.edu/)
 * [Spank plugin for Quantum workload](https://github.com/qiskit-community/spank-plugins)
 * [Quantum Resource Management Interface(QRMI)](https://github.com/qiskit-community/qrmi)
