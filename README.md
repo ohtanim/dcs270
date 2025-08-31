@@ -33,6 +33,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Refer [Installing conda on PPC64le](https://docs.cci.rpi.edu/software/Conda/#installing-conda-on-ppc64le) to setup conda for ppc64le.
 
+And then,
+
 ```bash
 conda create -y --name qrmi_ppc
 conda activate qrmi_ppc
