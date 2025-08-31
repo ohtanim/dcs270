@@ -39,16 +39,12 @@ conda activate qrmi_ppc
 conda install python
 conda install clang
 conda install libclang
+# required by `scipy`, as dependencies of Pasqal's `pulser` modules.
 conda install openblas-devel
+# required by `matplotlib`, as dependencies of Pasqal's `pulser` modules.
 conda install jpeg
 conda deactivate
 ```
-
-> [!NOTE]
-> `openblas-devel` is required by `scipy`, as dependencies of Pasqal's `pulser` modules.
-
-> [!NOTE]
-> `jpeg` is required by `matplotlib`, as dependencies of Pasqal's `pulser` modules.
 
 ### Cloning Git respositories
 
@@ -267,9 +263,15 @@ conda deactivate
 #### Creating input data
 ```bash
 conda activate qrmi_ppc
+
 cd $HOME/barn/qrmi/examples/task_runner/qiskit
+
+# Generating an estimator input for the specified backend
 python gen_estimator_inputs.py <backend_name> https://quantum.cloud.ibm.com/api <your apikey> <your Service CRN>
+
+# Generating a sampler input for the specified backend
 python gen_sampler_inputs.py <backend_name> https://quantum.cloud.ibm.com/api <your apikey> <your Service CRN>
+
 conda deactivate
 ```
 
