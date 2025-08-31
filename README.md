@@ -286,7 +286,7 @@ cd $HOME/barn/
 
 #### 2.3 Creating `.env` file with parameter values
 
-Refer [Creating .env file](#creating-env-file).
+Refer [Creating .env file](#14-creating-env-file-with-parameter-values).
 
 #### 2.4 Run a task
 ```bash
