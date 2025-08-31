@@ -1,11 +1,5 @@
 # dcs270
 
-## Jump To:
-* [Setting up your environment on dcs270](#setting-up)
-* [Building and installing QRMI and its SPANK Plugin](#building-and-installing-spank-plugin--qrmi)
-* [Unit testing](#unit-testing)
-* [References](#references)
-
 ## Logging on to dcs270 
 
 ```bash
