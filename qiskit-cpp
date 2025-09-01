@@ -1,0 +1,152 @@
+# qiskit-cpp on dcs270
+
+## Logging on to dcs270 
+
+```bash
+# login to data center
+ssh <your userid>@blp01.ccni.rpi.edu
+
+# login to frontend of DCS Cluster
+ssh dcsfen01
+
+# start an interactive session
+salloc -t 120 --reservation=root_48 --gres=gpu:1 -p dcs-2024
+
+# login to dcs270 node
+ssh dcs270
+```
+
+## Setting up
+
+### Installing Rust toolset
+
+```bash
+# recommend to install Rust under Barn directory because they consumes large size of filesystem.
+export CARGO_HOME=$HOME/barn/rust/.cargo
+export RUSTUP_HOME=$HOME/barn/rust/.rustup
+
+# Install Rust toolsets
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+### Installing dependencies
+
+Refer [Installing conda on PPC64le](https://docs.cci.rpi.edu/software/Conda/#installing-conda-on-ppc64le) to setup conda for ppc64le.
+
+And then,
+
+```bash
+conda create -y --name qiskit_c_cpp
+conda activate qiskit_c_cpp
+conda install python
+conda install clang
+conda install libclang
+conda deactivate
+```
+
+### Cloning Git respositories
+
+```bash
+# set proxy to allow internet connection from node.
+export http_proxy=http://proxy:8888
+export https_proxy=$http_proxy
+
+# create clones of QRMI and its spank-plugin
+cd $HOME/barn
+git clone https://github.com/Qiskit/qiskit.git
+git clone https://github.com/Qiskit/qiskit-cpp.git
+git clone https://github.com/qiskit-community/qrmi.git
+```
+
+## Building and Installing Qiskit Cpp
+
+### Using GCC 15 (System default is 8.4)
+
+Use newer version of GCC because recent nympy/scipy cannot be built with GCC 8.4. 
+
+```bash
+# Clear the environment from any previously loaded modules
+module purge > /dev/null 2>&1
+
+# Load the module environment suitable for build
+module load gcc/15.1.0
+```
+
+Following 2 environment variables are required for Rust cross compilation.
+
+```bash
+export CC=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/gcc
+export CXX=/gpfs/u/software/dcs-rhel8/gcc/15.1.0/bin/g++
+```
+
+### Setting environment variables for Rust tools
+
+```bash
+# set environment variables for Rust toolset
+source $HOME/barn/rust/.cargo/env
+```
+
+### Activating conda
+
+```bash
+conda activate qiskit_c_cpp
+```
+
+### Setting other environment variables
+
+> [!NOTE]
+> Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
+
+```bash
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
+export CPATH="$CONDA_PREFIX/include:$CPATH"
+export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
+export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
+export LIBCLANG_PATH=$CONDA_PREFIX/lib
+```
+
+The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
+
+```bash
+export OPENSSL_DIR=$HOME/barn/miniconda3
+export OPENSSL_STATIC=1
+```
+
+### Building Qiskit C API
+```bash
+cd $HOME/barn/qiskit
+mkdir c
+```
+
+### Building QRMI API
+
+```bash
+cd $HOME/barn/qrmi
+cargo build --release
+```
+
+### Building Qiskit C++ API
+
+```bash
+cd $HOME/barn/qiskit-cpp
+mkdir build
+cd build
+cmake -DQISKIT_ROOT=$HOME/barn/qiskit -DQRMI_ROOT=$HOME/barn/qrmi -Wno-dev ..
+make
+```
+
+### Deactivating conda
+
+```bash
+conda deactivate
+```
+
+## Unit Testing
+
+
+## References
+* [Rensselaer - Center for Computational Innovation - Documentation](https://docs.cci.rpi.edu/)
+* [Quantum Resource Management Interface(QRMI)](https://github.com/qiskit-community/qrmi)
+
+## END OF DOCUMENT
