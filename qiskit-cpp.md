@@ -146,12 +146,6 @@ export https_proxy=$http_proxy
 
 conda activate qiskit_c_cpp
 
-# Clear the environment from any previously loaded modules
-module purge > /dev/null 2>&1
-
-# Load the module environment suitable for build
-module load gcc/15.1.0
-
 export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
 export CPATH="$CONDA_PREFIX/include:$CPATH"
