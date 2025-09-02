@@ -99,7 +99,7 @@ export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
 export CPATH="$CONDA_PREFIX/include:$CPATH"
 ```
 
-The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
+(For QRMI) The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
 
 ```bash
 export OPENSSL_DIR=$HOME/barn/miniconda3
