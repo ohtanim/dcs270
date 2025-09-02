@@ -42,6 +42,8 @@ conda activate qiskit_c_cpp
 conda install python
 conda install clang
 conda install libclang
+# libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by ./circuit_test)
+conda install -c conda-forge libstdcxx-ng
 conda deactivate
 ```
 
