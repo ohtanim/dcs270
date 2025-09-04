@@ -42,8 +42,6 @@ conda activate qiskit_c_cpp
 conda install python
 conda install clang
 conda install libclang
-# libstdc++.so.6: version `GLIBCXX_3.4.32' not found (required by ./circuit_test)
-conda install -c conda-forge libstdcxx-ng
 conda deactivate
 ```
 
@@ -62,18 +60,6 @@ git clone https://github.com/qiskit-community/qrmi.git
 ```
 
 ## Building and Installing Qiskit Cpp
-
-### Using GCC 15 (System default is 8.4)
-
-Use newer version of GCC for building qiskit-cpp. 
-
-```bash
-# Clear the environment from any previously loaded modules
-module purge > /dev/null 2>&1
-
-# Load the module environment suitable for build
-module load gcc/15.1.0
-```
 
 ### Setting environment variables for Rust tools
 
