@@ -39,7 +39,9 @@ And then,
 conda create -y --name qrmi_ppc
 conda activate qrmi_ppc
 conda install python
+# required to build aws-lc-sys, as dependencies of qrmi.
 conda install clang
+# required to build aws-lc-sys, as dependencies of qrmi.
 conda install libclang
 # required by `scipy`, as dependencies of Pasqal's `pulser` modules.
 conda install openblas-devel
@@ -65,7 +67,7 @@ git clone https://github.com/qiskit-community/qrmi.git
 
 ### Using GCC 15 (System default is 8.4)
 
-Use newer version of GCC because recent nympy/scipy cannot be built with GCC 8.4. 
+Use newer version of GCC because recent nympy/scipy as dependencies of Qiskit cannot be built with GCC 8.4. 
 
 ```bash
 # Clear the environment from any previously loaded modules
