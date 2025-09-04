@@ -40,8 +40,8 @@ conda create -y --name qiskit_c_cpp
 conda activate qiskit_c_cpp
 # `python` is required to build with Qiskit C API library. 
 conda install python
-conda install clang
-conda install libclang
+# required to build aws-lc-sys, as dependencies of qrmi.
+conda install clang libclang
 conda deactivate
 ```
 
