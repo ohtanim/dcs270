@@ -95,12 +95,17 @@ cd $HOME/barn/qiskit-capi-demo/deps/qiskit
 make c
 ```
 
+* [Build log](./qiskit-c-api-build.txt)
+
 ### QRMI
 
 ```bash
 cd $HOME/barn/qiskit-capi-demo/deps/qrmi
 cargo build --release
 ```
+
+* [Build log](./qrmi-build.txt)
+
 
 ### Qiskit C++ API
 
@@ -111,6 +116,8 @@ cd build
 cmake -DQISKIT_ROOT=$HOME/barn/qiskit-capi-demo/deps/qiskit -DQRMI_ROOT=$HOME/barn/qiskit-capi-demo/deps/qrmi ..
 make
 ```
+
+* [Build log](./qiskit-cpp-build.txt)
 
 ### C API demo
 
@@ -123,7 +130,7 @@ make
 ```
 
 * [CMake output](./cmake_out.txt)
-* [make output](./make_out.txt)
+* [Build log](./make_out.txt)
 
 
 ## Running capi-demo
