@@ -1,0 +1,53 @@
+(qiskit-demo) [QNTMohmn@dcs270 build]$ cmake -DQISKIT_ROOT=$HOME/barn/qiskit-capi-demo/deps/qiskit -DQRMI_ROOT=$HOME/barn/qiskit-capi-demo/deps/qrmi ..
+-- The CXX compiler identification is GNU 8.5.0
+-- The C compiler identification is GNU 8.5.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/lib64/ccache/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/lib64/ccache/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+CMake Warning (dev) at /gpfs/u/home/QNTM/QNTMohmn/barn/miniconda3/envs/qiskit-demo/share/cmake-3.26/Modules/FetchContent.cmake:1282 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  CMakeLists.txt:26 (FetchContent_Declare)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Using the multi-header code from /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/deps/qiskit-cpp/build/_deps/json-src/include/
+   Qiskit Root = /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/deps/qiskit
+   Qiskit Root = /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/deps/qiskit
+   Qiskit Root = /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/deps/qiskit
+   Qiskit Root = /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/deps/qiskit
+-- Configuring done (2.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/deps/qiskit-cpp/build
+(qiskit-demo) [QNTMohmn@dcs270 build]$ make
+[ 12%] Building CXX object CMakeFiles/circuit_test.dir/tests/circuit_test.cpp.o
+[ 25%] Linking CXX executable circuit_test
+[ 25%] Built target circuit_test
+[ 37%] Building CXX object CMakeFiles/observable_test.dir/tests/observable_test.cpp.o
+[ 50%] Linking CXX executable observable_test
+[ 50%] Built target observable_test
+[ 62%] Building CXX object CMakeFiles/sampler_test.dir/tests/sampler_test.cpp.o
+[ 75%] Linking CXX executable sampler_test
+[ 75%] Built target sampler_test
+[ 87%] Building CXX object CMakeFiles/transpile_test.dir/tests/transpile_test.cpp.o
+[100%] Linking CXX executable transpile_test
+[100%] Built target transpile_test
