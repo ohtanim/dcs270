@@ -122,6 +122,10 @@ cmake ..
 make
 ```
 
+* [CMake output](./cmake_out.txt)
+* [make output](./make_out.txt)
+
+
 ## Running capi-demo
 
 ```bash
@@ -130,3 +134,5 @@ export QISKIT_IBM_INSTANCE=<your Service CRN>
 cd $HOME/barn/qiskit-capi-demo/build
 ./capi-demo --fcidump ../data/fcidump_Fe4S4_MO.txt -v --tolerance 1.0e-3 --max_time 600 --recovery 1 --number_of_samples 1000 --backend_name ibm_fez
 ```
+
+* [Result](./capi-demo-result.txt)
