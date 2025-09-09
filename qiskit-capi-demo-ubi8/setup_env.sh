@@ -1,0 +1,10 @@
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
+export CPATH="$CONDA_PREFIX/include:$CPATH"
+export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
+export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
+export LIBCLANG_PATH=$CONDA_PREFIX/lib
+export OPENSSL_DIR=$HOME/miniconda3
+export OPENSSL_STATIC=1
+export QISKIT_IBM_TOKEN=<your API key>
+export QISKIT_IBM_INSTANCE=crn:v1:bluemix:public:quantum-computing:us-east:a/266254cf897e4930b0e3cee07ccda7a4:7ef4ef25-e239-4748-9f3e-997c545d3587::
