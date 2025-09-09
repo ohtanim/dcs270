@@ -28,6 +28,8 @@ export RUSTUP_HOME=$HOME/barn/rust/.rustup
 
 # Install Rust toolsets
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+source $HOME/barn/rust/.cargo/env
 ```
 
 ### Installing dependencies
@@ -49,7 +51,6 @@ conda install eigen -c conda-forge
 # gcc/g++ 14.3.0
 conda install cxx-compiler -c conda-forge
 conda install openmpi cmake
-conda deactivate
 ```
 
 ### Setting proxy for internet connection
@@ -58,4 +59,74 @@ conda deactivate
 # set proxy to allow internet connection from node.
 export http_proxy=http://proxy:8888
 export https_proxy=$http_proxy
+```
+
+### Setting other environment variables
+
+> [!NOTE]
+> Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
+
+```bash
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
+export CPATH="$CONDA_PREFIX/include:$CPATH"
+export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
+export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
+export LIBCLANG_PATH=$CONDA_PREFIX/lib
+```
+
+The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
+
+```bash
+export OPENSSL_DIR=$HOME/barn/miniconda3
+export OPENSSL_STATIC=1
+```
+
+### Preparing source tree
+
+Refer README for qiskit-capi-demo.
+
+## Building modules
+
+### Qiskit C API
+
+```bash
+cd $HOME/barn/qiskit-capi-demo/deps/qiskit
+make c
+```
+
+### QRMI
+
+```bash
+cd $HOME/barn/qiskit-capi-demo/deps/qrmi
+cargo build --release
+```
+
+### Qiskit C++ API
+
+```bash
+cd $HOME/barn/qiskit-capi-demo/deps/qiskit-cpp
+mkdir build
+cd build
+cmake -DQISKIT_ROOT=$HOME/barn/qiskit-capi-demo/deps/qiskit -DQRMI_ROOT=$HOME/barn/qiskit-capi-demo/deps/qrmi ..
+make
+```
+
+### C API demo
+
+```bash
+cd $HOME/barn/qiskit-capi-demo/
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Running capi-demo
+
+```bash
+export QISKIT_IBM_TOKEN=<your API token>
+export QISKIT_IBM_INSTANCE=<your Service CRN>
+cd $HOME/barn/qiskit-capi-demo/build
+./capi-demo --fcidump ../data/fcidump_Fe4S4_MO.txt -v --tolerance 1.0e-3 --max_time 600 --recovery 1 --number_of_samples 1000 --backend_name ibm_fez
 ```
