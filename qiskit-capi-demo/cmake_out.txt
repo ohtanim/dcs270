@@ -1,0 +1,26 @@
+(qiskit-demo) [QNTMohmn@dcs270 build]$ cmake ..
+-- The C compiler identification is GNU 14.3.0
+-- The CXX compiler identification is GNU 14.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /gpfs/u/home/QNTM/QNTMohmn/barn/miniconda3/envs/qiskit-demo/bin/powerpc64le-conda-linux-gnu-cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /gpfs/u/home/QNTM/QNTMohmn/barn/miniconda3/envs/qiskit-demo/bin/powerpc64le-conda-linux-gnu-c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for sgemm_
+-- Looking for sgemm_ - found
+-- Found BLAS: /gpfs/u/home/QNTM/QNTMohmn/barn/miniconda3/envs/qiskit-demo/lib/libopenblas.so  
+-- Found MPI_C: /gpfs/u/home/QNTM/QNTMohmn/barn/miniconda3/envs/qiskit-demo/lib/libmpi.so (found version "3.1") 
+-- Found MPI_CXX: /gpfs/u/home/QNTM/QNTMohmn/barn/miniconda3/envs/qiskit-demo/lib/libmpi_cxx.so (found version "3.1") 
+-- Found MPI: TRUE (found version "3.1")  
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Using the multi-header code from /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/build/_deps/json-src/include/
+-- Configuring done (8.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /gpfs/u/home/QNTM/QNTMohmn/barn/qiskit-capi-demo/build
