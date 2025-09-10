@@ -48,8 +48,8 @@ conda install clang
 conda install libclang
 conda install openblas-devel
 conda install eigen -c conda-forge
-# gcc/g++ 14.3.0
-conda install cxx-compiler -c conda-forge
+# gcc/g++ 11.2.0
+conda install cxx-compiler==1.5.2 -c conda-forge
 conda install openmpi cmake
 ```
 
