@@ -35,8 +35,14 @@ conda activate qrmi_x86
 conda install python
 # required to build spank plugin.
 conda install anaconda::cmake
+```
+<s>
+```bash
 # use OpenSSL v3 for security
 conda install anaconda::openssl
+```
+</s>
+```bash
 conda deactivate
 ```
 
@@ -68,7 +74,7 @@ conda activate qrmi_x86
 ```
 
 ### Setting other environment variables
-
+<s>
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on nplfen01 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
 
@@ -87,6 +93,7 @@ The following environment variables will statically link the OpenSSL 3 library i
 export OPENSSL_DIR=$HOME/barn/miniconda3x86
 export OPENSSL_STATIC=1
 ```
+</s>
 
 ### Building spank_qrmi plugin
 ```bash
