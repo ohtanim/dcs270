@@ -63,6 +63,8 @@ export https_proxy=$http_proxy
 
 ### Setting other environment variables
 
+<s>
+
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
 
@@ -81,6 +83,8 @@ The following environment variables will statically link the OpenSSL 3 library i
 export OPENSSL_DIR=$HOME/barn/miniconda3
 export OPENSSL_STATIC=1
 ```
+
+</s>
 
 ### Preparing source tree
 
