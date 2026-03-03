@@ -75,7 +75,7 @@ conda activate qiskit_c_cpp
 ```
 
 ### Setting other environment variables
-
+<s>
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
 
@@ -91,6 +91,7 @@ export CPATH="$CONDA_PREFIX/include:$CPATH"
 export OPENSSL_DIR=$HOME/barn/miniconda3
 export OPENSSL_STATIC=1
 ```
+</s>
 
 ### Building Qiskit C API
 ```bash
