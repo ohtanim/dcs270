@@ -37,11 +37,14 @@ conda install python
 conda install anaconda::cmake
 ```
 <s>
+
 ```bash
 # use OpenSSL v3 for security
 conda install anaconda::openssl
 ```
+
 </s>
+
 ```bash
 conda deactivate
 ```
