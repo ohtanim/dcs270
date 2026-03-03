@@ -98,6 +98,7 @@ conda activate qrmi_ppc
 ```
 
 ### Setting other environment variables
+<s>
 
 > [!NOTE]
 > Ensure to use libraries and header files from the Conda environment, as the modules on dcs270 are outdated. For example, openssl is 1.1.1 which is incompatible to 3.0 installed during `conda install python`.
@@ -108,7 +109,7 @@ export LIBRARY_PATH="$CONDA_PREFIX/lib:$LIBRARY_PATH"
 export CPATH="$CONDA_PREFIX/include:$CPATH"
 export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
 export CFLAGS="-I$CONDA_PREFIX/include $CFLAGS"
-export LIBCLANG_PATH=$CONDA_PREFIX/lib
+export LIBCLANG_PATH=$CONDA_PREFIX/lib~~
 ```
 
 The following environment variables will statically link the OpenSSL 3 library in Conda (= no need to install OpenSSL 3 as a runtime dependency). If you want dynamic linking, specify only `export OPENSSL_DIR=$CONDA_PREFIX`. 
@@ -117,6 +118,7 @@ The following environment variables will statically link the OpenSSL 3 library i
 export OPENSSL_DIR=$HOME/barn/miniconda3
 export OPENSSL_STATIC=1
 ```
+</s>
 
 ### Building spank_qrmi plugin
 ```bash
